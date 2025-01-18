@@ -1,9 +1,10 @@
-# Quy Tắc
-## Bắt buộc tạo nhánh mới trước khi clone dự án về
-## Chỉ được tạo merge request vào nhánh backend (lúc họp sẽ nói kĩ hơn)
+## Quy Tắc Bắt Buộc (Mọi người không hiểu quy tắc nào thì hỏi vào nhóm)
+### 1. Bắt buộc tạo nhánh mới trước khi clone dự án về.
+### 2. Tạo nhánh mới phải từ nhánh backend.
+### 3. Chỉ được tạo merge request vào nhánh backend.
 
-# Các Bước Để Chạy Dự Án
-## Chuyển sang nhánh vừa tạo
+## Các Bước Để Chạy Dự Án
+### Chuyển sang nhánh vừa tạo
 ```
 git checkout <ten_nhanh>
 ```

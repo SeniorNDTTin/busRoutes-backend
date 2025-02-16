@@ -1,8 +1,8 @@
-import express from "express";
-const router = express.Router();
+import express, {Router} from "express";
+const router: Router = express.Router();
 
-import validate from "../../validates/admin/address.validate";
-import controller from "../../controllers/admin/address.controller";
+import validate from "../../validates/admin/district.validate";
+import controller from "../../controllers/admin/district.controller";
 
 router.get("/get", controller.get);
 router.get("/get/:id", controller.getById);

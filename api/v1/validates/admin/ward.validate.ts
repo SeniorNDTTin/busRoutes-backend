@@ -1,18 +1,25 @@
 import { NextFunction, Request, Response } from "express";
 
-// [POST] /api/v1/admin/districts/create
+// [POST] /api/v1/admin/wards/create
 const create = (req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> => {
   try {
-    const name = req.body.name;
+    const name: string = req.body.name;
+    const districtId: string = req.body.districtId;
 
-    if (!name) {
+    if (
+      !name ||
+      !districtId
+    ) {
       return res.json({
         code: 400,
         message: "Missing required information."
       });
     }
 
-    if (typeof name !== "string") {
+    if (
+      typeof name !== "string" ||
+      typeof districtId !== "string"
+    ) {
       return res.json({
         code: 400,
         message: "Missing datatype."
@@ -28,19 +35,26 @@ const create = (req: Request, res: Response, next: NextFunction): void | Respons
   }
 }
 
-// [PATCH] /api/v1/admin/districts/update/:id
+// [POST] /api/v1/admin/wards/update/:id
 const update = (req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> => {
   try {
-    const name = req.body.name;
+    const name: string = req.body.name;
+    const districtId: string = req.body.districtId;
 
-    if (!name) {
+    if (
+      !name &&
+      !districtId
+    ) {
       return res.json({
         code: 400,
         message: "Missing required information."
       });
     }
 
-    if (typeof name !== "string") {
+    if (
+      (name && typeof name !== "string") ||
+      (districtId && typeof districtId !== "string")
+    ) {
       return res.json({
         code: 400,
         message: "Missing datatype."
@@ -56,8 +70,8 @@ const update = (req: Request, res: Response, next: NextFunction): void | Respons
   }
 }
 
-const districtValidate = {
+const wardValidate = {
   create,
   update
 };
-export default districtValidate;
+export default wardValidate;

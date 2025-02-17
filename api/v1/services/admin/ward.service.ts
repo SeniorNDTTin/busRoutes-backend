@@ -1,4 +1,5 @@
 import { Request } from "express";
+
 import WardModel from "../../models/ward.model";
 import IWard from "../../interfaces/ward.interface";
 

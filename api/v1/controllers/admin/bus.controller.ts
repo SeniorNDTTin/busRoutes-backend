@@ -47,9 +47,9 @@ const getById = async (req: Request, res: Response): Promise<Response<any, Recor
 // [POST] /api/v1/admin/buses/create
 const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
-    const { busId, licensePlate, chairQuantity } = req.body;
+    const { licensePlate, chairQuantity } = req.body;
 
-    const newBus = await busService.create({  licensePlate, chairQuantity });
+    const newBus = await busService.create({ licensePlate, chairQuantity });
     return res.json({
       code: 201,
       message: "Bus was created successfully.",
@@ -68,7 +68,7 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
   try {
     const id: string = req.params.id;
 
-    const { busId, licensePlate, chairQuantity } = req.body;
+    const { licensePlate, chairQuantity } = req.body;
 
     const busExists = await busService.findById(id);
     if (!busExists) {

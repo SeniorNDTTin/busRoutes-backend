@@ -81,7 +81,7 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
 
     const newDistrict = await districtService.update(id, { name });
     return res.json({
-      status: 200,
+      code: 200,
       message: "District was updated successfully.",
       data: newDistrict
     });

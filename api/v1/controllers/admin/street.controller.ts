@@ -98,7 +98,7 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
         message: "Street id not found."
       });
     }
-    if (!wardExists) {
+    if (wardId && !wardExists) {
       return res.json({
         code: 404,
         message: "Ward id not found."

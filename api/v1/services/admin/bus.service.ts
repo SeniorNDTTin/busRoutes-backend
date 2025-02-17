@@ -10,7 +10,7 @@ const find = async (req: Request) => {
 
 // Lấy chi tiết của một bus theo busId
 const findById = async (id: string) => {
-  const busExists = await BusModel.findOne({ busId: id });
+  const busExists = await BusModel.findOne({ _id: id });
   return busExists;
 }
 
@@ -23,7 +23,7 @@ const create = async (bus: Partial<IBus>) => {
 
 // Cập nhật thông tin một bus theo busId
 const update = async (id: string, bus: Partial<IBus>) => {
-  const updatedBus = await BusModel.findOneAndUpdate({ busId: id }, bus, {
+  const updatedBus = await BusModel.findOneAndUpdate({ _id: id }, bus, {
     new: true,
     runValidators: true
   });
@@ -32,7 +32,7 @@ const update = async (id: string, bus: Partial<IBus>) => {
 
 // Xóa một bus theo busId
 const del = async (id: string) => {
-  await BusModel.deleteOne({ busId: id });
+  await BusModel.deleteOne({ _id: id });
 }
 
 const busService = {

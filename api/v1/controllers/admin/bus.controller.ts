@@ -49,7 +49,7 @@ const create = async (req: Request, res: Response): Promise<Response<any, Record
   try {
     const { busId, licensePlate, chairQuantity } = req.body;
 
-    const newBus = await busService.create({ busId, licensePlate, chairQuantity });
+    const newBus = await busService.create({  licensePlate, chairQuantity });
     return res.json({
       code: 201,
       message: "Bus was created successfully.",
@@ -78,7 +78,7 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
       });
     }
 
-    const updatedBus = await busService.update(id, { busId, licensePlate, chairQuantity });
+    const updatedBus = await busService.update(id, { licensePlate, chairQuantity });
     return res.json({
       status: 200,
       message: "Bus was updated successfully.",

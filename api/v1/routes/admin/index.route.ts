@@ -7,6 +7,7 @@ import wardRoutes from "./ward.route";
 import streetRoutes from "./street.route";
 import busStopRoutes from "./busStop.route";
 import busRoutes from "./bus.route";
+import directionRoutes from "./direction.route";
 
 const adminRouteV1 = (app: Express) => {
   const path = "/api/v1" + configs.prefixAdmin;
@@ -16,6 +17,7 @@ const adminRouteV1 = (app: Express) => {
   app.use(`${path}/streets`, streetRoutes);
   app.use(`${path}/busStops`, busStopRoutes);
   app.use(`${path}/buses`, busRoutes);
+  app.use(`${path}/directions`, directionRoutes);
 }
 
 export default adminRouteV1;

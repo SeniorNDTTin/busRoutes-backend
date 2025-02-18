@@ -1,15 +1,16 @@
 import { Request, Response } from "express";
+
+import streetService from "../../services/admin/street.service";
 import wardService from "../../services/admin/ward.service";
-import districtService from "../../services/admin/district.service";
 
 // [GET] /api/v1/admin/wards/get
 const get = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
-    const wards = await wardService.find(req);
+    const streets = await streetService.find(req);
     return res.json({
       code: 200,
-      message: "Wards found.",
-      data: wards
+      message: "Streets found.",
+      data: streets
     });
   } catch {
     return res.json({
@@ -19,12 +20,39 @@ const get = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
-// [GET] /api/v1/admin/wards/get/:id
+// [GET] /api/v1/admin/streets/get/:id
 const getById = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
-    const wardExists = await wardService.findById(id);
+    const streetExists = await streetService.findById(id);
+    if (!streetExists) {
+      return res.json({
+        code: 404,
+        message: "Street id not found."
+      });
+    }
+
+    return res.json({
+      code: 200,
+      message: "Street found.",
+      data: streetExists
+    });
+  } catch {
+    return res.json({
+      code: 500,
+      message: "Something went wrong."
+    });
+  }
+}
+
+// [POST] /api/v1/admin/streets/create
+const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
+  try {
+    const name: string = req.body.name;
+    const wardId: string = req.body.wardId;
+
+    const wardExists = await wardService.findById(wardId);
     if (!wardExists) {
       return res.json({
         code: 404,
@@ -32,41 +60,14 @@ const getById = async (req: Request, res: Response): Promise<Response<any, Recor
       });
     }
 
-    return res.json({
-      code: 200,
-      message: "Ward found.",
-      data: wardExists
-    });
-  } catch {
-    return res.json({
-      code: 500,
-      message: "Something went wrong."
-    });
-  }
-}
-
-// [POST] /api/v1/admin/wards/create
-const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
-  try {
-    const name: string = req.body.name;
-    const districtId: string = req.body.districtId;
-
-    const districtExists = await districtService.findById(districtId);
-    if (!districtExists) {
-      return res.json({
-        code: 404,
-        message: "District id not found."
-      });
-    }
-
-    const newWard = await wardService.create({
+    const newStreet = await streetService.create({
       name,
-      districtId
+      wardId
     });
     return res.json({
       code: 201,
-      message: "Ward was created successfully.",
-      data: newWard
+      message: "Street was created successfully.",
+      data: newStreet
     });
   } catch {
     return res.json({
@@ -76,42 +77,42 @@ const create = async (req: Request, res: Response): Promise<Response<any, Record
   }
 }
 
-// [POST] /api/v1/admin/wards/update/:id
+// [POST] /api/v1/admin/streets/update/:id
 const update = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
     const name: string = req.body.name;
-    const districtId: string = req.body.districtId;
+    const wardId: string = req.body.wardId;
 
     const [
-      wardExists,
-      districtExists
+      streetExists,
+      wardExists
     ] = await Promise.all([
-      wardService.findById(id),
-      districtService.findById(districtId)
+      streetService.findById(id),
+      wardService.findById(wardId)
     ]);
-    if (!wardExists) {
+    if (!streetExists) {
+      return res.json({
+        code: 404,
+        message: "Street id not found."
+      });
+    }
+    if (wardId && !wardExists) {
       return res.json({
         code: 404,
         message: "Ward id not found."
       });
     }
-    if (districtId && !districtExists) {
-      return res.json({
-        code: 404,
-        message: "District id not found."
-      });
-    }
 
-    const newWard = await wardService.update(id, {
+    const newStreet = await streetService.update(id, {
       name,
-      districtId
+      wardId
     });
     return res.json({
       code: 200,
-      message: "Ward was updated successfully.",
-      data: newWard
+      message: "Street was updated successfully.",
+      data: newStreet
     });
   } catch {
     return res.json({
@@ -121,23 +122,23 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
   }
 }
 
-// [DELETE] /api/v1/admin/wards/delete/:id
+// [DELETE] /api/v1/admin/streets/delete/:id
 const del = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
-    const wardExists = await wardService.findById(id);
-    if (!wardExists) {
+    const streetExists = await streetService.findById(id);
+    if (!streetExists) {
       return res.json({
         code: 404,
-        message: "Ward id not found."
+        message: "Street id not found."
       });
     }
 
-    await wardService.del(id);
+    await streetService.del(id);
     return res.json({
       code: 200,
-      message: "Ward was deleted successfully."
+      message: "Street was deleted successfully."
     });
   } catch {
     return res.json({
@@ -147,11 +148,11 @@ const del = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
-const wardController = {
+const streetController = {
   get,
   getById,
   create,
   update,
   del
 };
-export default wardController;
+export default streetController;

@@ -1,15 +1,14 @@
 import { Request, Response } from "express";
+import busService from "../../services/admin/bus.service";
 
-import districtService from "../../services/admin/district.service";
-
-// [GET] /api/v1/admin/districts/get
+// [GET] /api/v1/admin/buses/get
 const get = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
-    const districts = await districtService.find(req);
+    const buses = await busService.find(req);
     return res.json({
       code: 200,
-      message: "Districts found.",
-      data: districts
+      message: "Buses found.",
+      data: buses
     });
   } catch {
     return res.json({
@@ -19,23 +18,23 @@ const get = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
-// [GET] /api/v1/admin/districts/get/:id
+// [GET] /api/v1/admin/buses/get/:id
 const getById = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
-    const districtExists = await districtService.findById(id);
-    if (!districtExists) {
+    const busExists = await busService.findById(id);
+    if (!busExists) {
       return res.json({
         code: 404,
-        message: "District id not found."
+        message: "Bus id not found."
       });
     }
 
     return res.json({
       code: 200,
-      message: "District found.",
-      data: districtExists
+      message: "Bus found.",
+      data: busExists
     });
   } catch {
     return res.json({
@@ -45,16 +44,16 @@ const getById = async (req: Request, res: Response): Promise<Response<any, Recor
   }
 }
 
-// [POST] /api/v1/admin/districts/create
+// [POST] /api/v1/admin/buses/create
 const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
-    const name: string = req.body.name;
+    const { licensePlate, chairQuantity } = req.body;
 
-    const newDistrict = await districtService.create({ name });
+    const newBus = await busService.create({ licensePlate, chairQuantity });
     return res.json({
       code: 201,
-      message: "District was created successfully.",
-      data: newDistrict
+      message: "Bus was created successfully.",
+      data: newBus
     });
   } catch {
     return res.json({
@@ -64,26 +63,26 @@ const create = async (req: Request, res: Response): Promise<Response<any, Record
   }
 }
 
-// [PATCH] /api/v1/admin/districts/update/:id
+// [PATCH] /api/v1/admin/buses/update/:id
 const update = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
-    const name: string = req.body.name;
+    const { licensePlate, chairQuantity } = req.body;
 
-    const districtExists = await districtService.findById(id);
-    if (!districtExists) {
+    const busExists = await busService.findById(id);
+    if (!busExists) {
       return res.json({
         code: 404,
-        message: "District id not found."
+        message: "Bus id not found."
       });
     }
 
-    const newDistrict = await districtService.update(id, { name });
+    const updatedBus = await busService.update(id, { licensePlate, chairQuantity });
     return res.json({
-      code: 200,
-      message: "District was updated successfully.",
-      data: newDistrict
+      status: 200,
+      message: "Bus was updated successfully.",
+      data: updatedBus
     });
   } catch {
     return res.json({
@@ -93,23 +92,23 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
   }
 }
 
-// [DELETE] /api/v1/admin/districts/delete/:id
+// [DELETE] /api/v1/admin/buses/delete/:id
 const del = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
-    const districtExists = await districtService.findById(id);
-    if (!districtExists) {
+    const busExists = await busService.findById(id);
+    if (!busExists) {
       return res.json({
         code: 404,
-        message: "District id not found."
+        message: "Bus id not found."
       });
     }
 
-    await districtService.del(id);
+    await busService.del(id);
     return res.json({
       code: 200,
-      message: "District was deleted successfully."
+      message: "Bus was deleted successfully."
     });
   } catch {
     return res.json({
@@ -119,11 +118,12 @@ const del = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
-const districtCotroller = {
+const busController = {
   get,
   getById,
   create,
   update,
   del
 };
-export default districtCotroller;
+
+export default busController;

@@ -2,17 +2,37 @@
 import mongoose from "mongoose";
 
 const busRouteSchema = new mongoose.Schema({
-  name: {type: String,required: true},
-  fullDistance: {type: Number , require : true},
-  fullPrice: {type: Number , require: true},
-  time: {type: String , require: true },
-  firstFlightStartTime: {type: String , require: true},
-  lastFlightStartTime:{type: String, require: true},
-  TimeBetweenTwoFlight:{type: String , require: true}
-
+  name: {
+    type: String,
+    required: true
+  },
+  fullDistance: {
+    type: Number,
+    required: true
+  },
+  fullPrice: {
+    type: Number,
+    required: true
+  },
+  time: {
+    type: String,
+    required: true
+  },
+  firstFlightStartTime: {
+    type: String,
+    required: true
+  },
+  lastFlightStartTime: {
+    type: String,
+    required: true
+  },
+  timeBetweenTwoFlight: {
+    type: String,
+    required: true
+  }
 }, {
   timestamps: true
 });
 
 const busRouteModel = mongoose.model("busRouteModel", busRouteSchema, "busRoutes");
-export default busRouteModel ;
+export default busRouteModel;

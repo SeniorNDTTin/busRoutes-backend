@@ -80,7 +80,7 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
 
     const updatedBus = await busService.update(id, { licensePlate, chairQuantity });
     return res.json({
-      status: 200,
+      code: 200,
       message: "Bus was updated successfully.",
       data: updatedBus
     });

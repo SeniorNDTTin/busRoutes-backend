@@ -1,12 +1,24 @@
-import express from "express"
+import express, { Router } from "express";
+const router: Router = express.Router();
 
-import busRouteController from "../../controllers/admin/busRoutes.controller";
-import busRouteValidation from "../../validates/admin/busRoute.validate";
+import validate from "../../validates/admin/busRoute.validate";
+import controller from "../../controllers/admin/busRoute.controller"; 
 
-const Router = express.Router();
-Router.post('/create', busRouteValidation.create, busRouteController.create)
-Router.get("/get", busRouteController.getAll);
-Router.get("/get/:id", busRouteController.getById);
-Router.patch("/update/:id", busRouteValidation.create, busRouteController.update)
-Router.delete("/delete/:id", busRouteController.del)
-export  const busRoute = Router
+router.get("/get", controller.get);
+router.get("/get/:id", controller.getById);
+
+router.post(
+  "/create",
+  validate.create, 
+  controller.create
+);
+
+router.patch(
+  "/update/:id",
+  validate.update, 
+  controller.update
+);
+
+router.delete("/delete/:id", controller.del);
+
+export default router;

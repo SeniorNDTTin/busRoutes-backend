@@ -1,7 +1,7 @@
 import { Request } from "express";
 
 import busRouteModel from "../../models/busRoute.model";
-import IBusRoutes from "../../interfaces/busRoute.interface";
+import IBusRoute from "../../interfaces/busRoute.interface";
 
 const find = async (req: Request) => {
   const busRoutes = await busRouteModel.find({});
@@ -13,18 +13,18 @@ const findById = async (id: string) => {
   return busRouteExists;
 }
 
-const create = async (data: Partial<IBusRoutes>) => {
-  const newBusRoutes = new busRouteModel(data);
-  await newBusRoutes.save();
-  return newBusRoutes;
+const create = async (data: Partial<IBusRoute>) => {
+  const newBusRoute = new busRouteModel(data);
+  await newBusRoute.save();
+  return newBusRoute;
 }
 
-const update = async (id: string, data: Partial<IBusRoutes>) => {
-  const newDistrict = await busRouteModel.findOneAndUpdate({ _id: id }, data, {
+const update = async (id: string, data: Partial<IBusRoute>) => {
+  const newBusRoute = await busRouteModel.findOneAndUpdate({ _id: id }, data, {
     new: true,
     runValidators: true
   });
-  return newDistrict;
+  return newBusRoute;
 }
 
 const del = async (id: string) => {

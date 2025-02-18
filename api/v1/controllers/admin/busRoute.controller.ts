@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import busRoutesService from "../../services/admin/busRoute.service";
 
+// [GET] /api/v1/admin/busRoutes/get
 const get = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const busRoutes = await busRoutesService.find(req);
@@ -18,6 +19,7 @@ const get = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
+// [GET] /api/v1/admin/busRoutes/get/:id
 const getById = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
@@ -43,7 +45,8 @@ const getById = async (req: Request, res: Response): Promise<Response<any, Recor
   }
 }
 
-const create = async (req: Request, res: Response) => {
+// [POST] /api/v1/admin/busRoutes/create
+const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const name: string = req.body.name;
     const fullDistance: number = req.body.fullDistance;
@@ -75,7 +78,8 @@ const create = async (req: Request, res: Response) => {
   }
 }
 
-const update = async (req: Request, res: Response) => {
+// [PATCH] /api/v1/admin/busRoutes/update/:id
+const update = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
@@ -117,6 +121,7 @@ const update = async (req: Request, res: Response) => {
   }
 }
 
+// [DELETE] /api/v1/admin/busRoutes/delete/:id
 const del = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;

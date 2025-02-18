@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
-const create = async (req: Request, res: Response, next: NextFunction) => {
+// [POST] /api/v1/admin/busRoutes/create
+const create = (req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> => {
 	try {
 		const name = req.body.name;
 		const fullDistance = req.body.fullDistance;
@@ -49,7 +50,8 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 	}
 }
 
-const update = async (req: Request, res: Response, next: NextFunction) => {
+// [PATCH] /api/v1/admin/busRoutes/update/:id
+const update = (req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> => {
 	try {
 		const name = req.body.name;
 		const fullDistance = req.body.fullDistance;

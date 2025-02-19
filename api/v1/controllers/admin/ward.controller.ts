@@ -147,11 +147,30 @@ const del = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
+// [GET] /api/v1/admin/wards/district/:districtId
+const getWardsByDistrict = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { districtId } = req.params; // Lấy districtId từ params
+    const wards = await wardService.findByDistrict(districtId); // Tìm ward theo districtId
+    return res.json({ 
+      code: 200, 
+      message: "Wards found.", 
+      data: wards 
+    });
+  } catch (error) {
+    return res.json({ 
+      code: 500, 
+      message: "Something went wrong." 
+    });
+  }
+};
+
 const wardController = {
   get,
   getById,
   create,
   update,
-  del
+  del,
+  getWardsByDistrict
 };
 export default wardController;

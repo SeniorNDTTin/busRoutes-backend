@@ -21,4 +21,6 @@ router.patch(
 
 router.delete("/delete/:id", controller.del);
 
+router.get("/ward/:wardId", controller.getStreetsByWard);
+
 export default router;

@@ -49,6 +49,7 @@ const getById = async (req: Request, res: Response) => {
 // [POST] /api/v1/admin/busStops/create
 const create = async (req: Request, res: Response) => {
   try {
+    const name: string = req.body.name;
     const longitude: number = req.body.longitude;
     const latitude: number = req.body.latitude;
     const streetId: string = req.body.streetId;
@@ -61,7 +62,7 @@ const create = async (req: Request, res: Response) => {
       });
     }
 
-    const newBusStop = await busStopService.create({ longitude, latitude, streetId });
+    const newBusStop = await busStopService.create({ name, longitude, latitude, streetId });
     return res.json({
       code: 201,
       message: "Bus stop was created successfully.",
@@ -80,6 +81,7 @@ const update = async (req: Request, res: Response) => {
   try {
     const id: string = req.params.id;
 
+    const name: string = req.body.name;
     const longitude: number = req.body.longitude;
     const latitude: number = req.body.latitude;
     const streetId: string = req.body.streetId;
@@ -104,7 +106,7 @@ const update = async (req: Request, res: Response) => {
       });
     }
 
-    const newBusStop = await busStopService.create({ longitude, latitude, streetId });
+    const newBusStop = await busStopService.update( id, { name, longitude, latitude, streetId });
     return res.json({
       code: 200,
       message: "Bus stop was updated successfully.",

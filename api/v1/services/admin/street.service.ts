@@ -31,11 +31,16 @@ const del = async (id: string) => {
   await StreetModel.deleteOne({ _id: id });
 }
 
+const findByWard = async(wardId: string) => {
+  return await StreetModel.find({wardId});
+}
+
 const streetService = {
   find,
   findById,
   create,
   update,
-  del
+  del,
+  findByWard
 };
 export default streetService;

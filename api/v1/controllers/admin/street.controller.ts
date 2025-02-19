@@ -148,11 +148,29 @@ const del = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
+// [GET] /api/v1/admin/streets/ward/:wardId
+const getStreetsByWard = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { wardId } = req.params;
+    const streets = await streetService.findByWard(wardId); 
+    return res.json({ 
+      code: 200, 
+      message: "Streets found.", data: streets 
+    });
+  } catch {
+    return res.json({ 
+      code: 500, 
+      message: "Something went wrong." 
+    });
+  }
+};
+
 const streetController = {
   get,
   getById,
   create,
   update,
-  del
+  del,
+  getStreetsByWard
 };
 export default streetController;

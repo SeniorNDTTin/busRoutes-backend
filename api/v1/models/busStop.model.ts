@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const busStopSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   longitude: {
     type: Number,
     required: true

@@ -21,4 +21,6 @@ router.patch(
 
 router.delete("/delete/:id", controller.del);
 
+router.get("/district/:districtId", controller.getWardsByDistrict);
+
 export default router;

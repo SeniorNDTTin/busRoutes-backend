@@ -31,11 +31,16 @@ const del = async (id: string) => {
   await WardModel.deleteOne({ _id: id });
 }
 
+const findByDistrict = async (districtId: string) => {
+  return await WardModel.find({districtId});
+}
+
 const wardService = {
   find,
   findById,
   create,
   update,
-  del
+  del,
+  findByDistrict
 };
 export default wardService;

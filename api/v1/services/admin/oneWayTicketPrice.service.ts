@@ -20,11 +20,11 @@ const create = async (data: Partial<IOneWayTicketPrice>) => {
 }
 
 const update = async (id: string, data: Partial<IOneWayTicketPrice>) => {
-  const newDistrict = await OneWayTicketPriceModel.findOneAndUpdate({ _id: id }, data, {
+  const newOneWayTicketPrice = await OneWayTicketPriceModel.findOneAndUpdate({ _id: id }, data, {
     new: true,
     runValidators: true
   });
-  return newDistrict;
+  return newOneWayTicketPrice;
 }
 
 const del = async (id: string) => {

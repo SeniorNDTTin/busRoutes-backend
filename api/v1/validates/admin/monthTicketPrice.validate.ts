@@ -1,15 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 
-// [POST] /api/v1/admin/oneWayTicketPrices/create
+// [POST] /api/v1/admin/monthTicketPrices/create
 const create = (req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> => {
   try {
-    const maxKilometer = req.body.maxKilometer;
-    const unitPrice = req.body.unitPrice;
+    const timeStart = req.body.timeStart;
+    const timeEnd = req.body.timeEnd;
+    const price = req.body.price;
     const busRouteId = req.body.busRouteId;
 
     if (
-      !maxKilometer ||
-      !unitPrice ||
+      !timeStart ||
+      !timeEnd ||
+      !price ||
       !busRouteId
     ) {
       return res.json({
@@ -19,9 +21,10 @@ const create = (req: Request, res: Response, next: NextFunction): void | Respons
     }
 
     if (
-      typeof maxKilometer !== "number" ||
-      typeof unitPrice !== "number" ||
-      typeof busRouteId !== "string" 
+      typeof timeStart !== "string" ||
+      typeof timeEnd !== "string" ||
+      typeof price !== "number" ||
+      typeof busRouteId !== "string"
     ) {
       return res.json({
         code: 400,
@@ -38,16 +41,18 @@ const create = (req: Request, res: Response, next: NextFunction): void | Respons
   }
 }
 
-// [PATCH] /api/v1/admin/oneWayTicketPrices/update/:id
+// [PATCH] /api/v1/admin/monthTicketPrices/update/:id
 const update = (req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> => {
   try {
-    const maxKilometer = req.body.maxKilometer;
-    const unitPrice = req.body.unitPrice;
+    const timeStart = req.body.timeStart;
+    const timeEnd = req.body.timeEnd;
+    const price = req.body.price;
     const busRouteId = req.body.busRouteId;
 
     if (
-      !maxKilometer &&
-      !unitPrice &&
+      !timeStart &&
+      !timeEnd &&
+      !price &&
       !busRouteId
     ) {
       return res.json({
@@ -57,8 +62,9 @@ const update = (req: Request, res: Response, next: NextFunction): void | Respons
     }
 
     if (
-      (maxKilometer && typeof maxKilometer !== "number") ||
-      (unitPrice && typeof unitPrice !== "number") ||
+      (timeStart && typeof timeStart !== "string") ||
+      (timeEnd && typeof timeEnd !== "string") ||
+      (price && typeof price !== "number") ||
       (busRouteId && typeof busRouteId !== "string")
     ) {
       return res.json({

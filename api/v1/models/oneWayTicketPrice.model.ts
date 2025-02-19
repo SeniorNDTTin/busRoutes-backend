@@ -17,5 +17,5 @@ const OneWayTicketPriceSchema = new mongoose.Schema({
   timestamps: true
 });
 
-const OneWayTicketPriceModel = mongoose.model("OneWayTicketPriceModel", OneWayTicketPriceSchema, "OneWayTicketPriceModel");
+const OneWayTicketPriceModel = mongoose.model("OneWayTicketPriceModel", OneWayTicketPriceSchema, "oneWayTicketPrices");
 export default OneWayTicketPriceModel;

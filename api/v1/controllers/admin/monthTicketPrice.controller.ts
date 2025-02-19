@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 
-import oneWayTicketPriceService from "../../services/admin/oneWayTicketPrice.service";
+import monthTicketPriceService from "../../services/admin/monthTicketPrice.service";
 import busRoutesService from "../../services/admin/busRoute.service";
 
-// [GET] /api/v1/admin/oneWayTicketPrices/get
+// [GET] /api/v1/admin/monthTicketPrices/get
 const get = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
-    const oneWayTicketPrices = await oneWayTicketPriceService.find(req);
+    const monthTicketPrices = await monthTicketPriceService.find(req);
     return res.json({
       code: 200,
-      message: "One way ticket prices found.",
-      data: oneWayTicketPrices
+      message: "Month ticket prices found.",
+      data: monthTicketPrices
     });
   } catch {
     return res.json({
@@ -20,23 +20,23 @@ const get = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
-// [GET] /api/v1/admin/oneWayTicketPrices/get/:id
+// [GET] /api/v1/admin/monthTicketPrices/get/:id
 const getById = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
-    const oneWayTicketPriceExists = await oneWayTicketPriceService.findById(id);
-    if (!oneWayTicketPriceExists) {
+    const monthTicketPriceExists = await monthTicketPriceService.findById(id);
+    if (!monthTicketPriceExists) {
       return res.json({
         code: 404,
-        message: "One way ticket price id not found."
+        message: "Month ticket price id not found."
       });
     }
 
     return res.json({
       code: 200,
-      message: "One way ticket price found.",
-      data: oneWayTicketPriceExists
+      message: "Month ticket price found.",
+      data: monthTicketPriceExists
     });
   } catch {
     return res.json({
@@ -46,11 +46,12 @@ const getById = async (req: Request, res: Response): Promise<Response<any, Recor
   }
 }
 
-// [POST] /api/v1/admin/oneWayTicketPrices/create
+// [POST] /api/v1/admin/monthTicketPrices/create
 const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
-    const maxKilometer: number = req.body.maxKilometer;
-    const unitPrice: number = req.body.unitPrice;
+    const timeStart: string = req.body.timeStart;
+    const timeEnd: string = req.body.timeEnd;
+    const price: number = req.body.price;
     const busRouteId: string = req.body.busRouteId;
 
     const busRouteExists = await busRoutesService.findById(busRouteId);
@@ -61,15 +62,16 @@ const create = async (req: Request, res: Response): Promise<Response<any, Record
       });
     }
 
-    const newOneWayTicketPrice = await oneWayTicketPriceService.create({
-      maxKilometer,
-      unitPrice,
+    const newMonthTicketPrice = await monthTicketPriceService.create({
+      timeStart,
+      timeEnd,
+      price,
       busRouteId
     });
     return res.json({
       code: 201,
-      message: "One way ticket price was created successfully.",
-      data: newOneWayTicketPrice
+      message: "Month ticket price was created successfully.",
+      data: newMonthTicketPrice
     });
   } catch {
     return res.json({
@@ -79,26 +81,27 @@ const create = async (req: Request, res: Response): Promise<Response<any, Record
   }
 }
 
-// [PATCH] /api/v1/admin/oneWayTicketPrices/update/:id
+// [PATCH] /api/v1/admin/monthTicketPrices/update/:id
 const update = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
-    const maxKilometer: number = req.body.maxKilometer;
-    const unitPrice: number = req.body.unitPrice;
+    const timeStart: string = req.body.timeStart;
+    const timeEnd: string = req.body.timeEnd;
+    const price: number = req.body.price;
     const busRouteId: string = req.body.busRouteId;
 
     const [
-      oneWayTicketPriceExists,
+      monthTicketPriceExists,
       busRouteExists
     ] = await Promise.all([
-      oneWayTicketPriceService.findById(id),
+      monthTicketPriceService.findById(id),
       busRoutesService.findById(busRouteId)
     ]);
-    if (!oneWayTicketPriceExists) {
+    if (!monthTicketPriceExists) {
       return res.json({
         code: 404,
-        message: "One way ticket price id not found."
+        message: "Month ticket price id not found."
       });
     }
     if (!busRouteExists) {
@@ -108,15 +111,16 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
       });
     }
 
-    const newOneWayTicketPrice = await oneWayTicketPriceService.update(id, {
-      maxKilometer,
-      unitPrice,
+    const newMonthTicketPrice = await monthTicketPriceService.update(id, {
+      timeStart,
+      timeEnd,
+      price,
       busRouteId
     });
     return res.json({
       code: 200,
-      message: "One way ticket price was updated successfully.",
-      data: newOneWayTicketPrice
+      message: "Month ticket price was updated successfully.",
+      data: newMonthTicketPrice
     });
   } catch {
     return res.json({
@@ -126,23 +130,23 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
   }
 }
 
-// [DELETE] /api/v1/admin/oneWayTicketPrices/delete/:id
+// [DELETE] /api/v1/admin/monthTicketPrices/delete/:id
 const del = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const id: string = req.params.id;
 
-    const oneWayTicketPriceExists = await oneWayTicketPriceService.findById(id);
-    if (!oneWayTicketPriceExists) {
+    const monthTicketPriceExists = await monthTicketPriceService.findById(id);
+    if (!monthTicketPriceExists) {
       return res.json({
         code: 404,
         message: "One way ticket price id not found."
       });
     }
 
-    await oneWayTicketPriceService.del(id);
+    await monthTicketPriceService.del(id);
     return res.json({
       code: 200,
-      message: "One way ticket price was deleted successfully."
+      message: "Month ticket price was deleted successfully."
     });
   } catch {
     return res.json({

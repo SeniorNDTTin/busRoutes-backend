@@ -37,7 +37,7 @@ const getById = async (req: Request, res: Response): Promise<Response<any, Recor
     return res.json({
       code: 200,
       message: "Schedule found.",
-      schedule: scheduleExists
+      data: scheduleExists
     });
   } catch {
     return res.json({
@@ -84,7 +84,7 @@ const create = async (req: Request, res: Response): Promise<Response<any, Record
     return res.json({
       code: 200,
       message: "Schedule was created successfully.",
-      schedule: newSchedule
+      data: newSchedule
     });
   } catch {
     return res.json({
@@ -104,11 +104,7 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
     const busId: string = req.body.busId;
     const busRouteId: string = req.body.busRouteId;
 
-    const [
-      scheduleExists,
-      busExists,
-      busRouteExists
-    ] = await Promise.all([
+    const [ scheduleExists,busExists, busRouteExists] = await Promise.all([
       scheduleService.findById(id),
       busService.findById(busId),
       busRoutesService.findById(busRouteId)
@@ -132,16 +128,11 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
       });
     }
 
-    const newSchedule = await scheduleService.create({
-      timeStart,
-      timeEnd,
-      busId,
-      busRouteId
-    });
+    const newSchedule = await scheduleService.update(id, {timeStart, timeEnd,busRouteId ,busId});
     return res.json({
       code: 200,
       message: "Schedules was updated successfully.",
-      schedule: newSchedule
+      data: newSchedule
     });
   } catch {
     return res.json({

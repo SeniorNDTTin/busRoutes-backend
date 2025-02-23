@@ -9,6 +9,7 @@ import busStopRoutes from "./busStop.route";
 import busRoutes from "./bus.route";
 import directionRoutes from "./direction.route";
 import busRouteRoutes from "./busRoute.route";
+import busRouteDetailRoutes from "./busRouteDetail.route";
 import oneWayTicketPriceRoutes from "./oneWayTicketPrice.route";
 import monthTicketPriceRoutes from "./monthTicketPrice.route";
 import scheduleRoutes from "./schedule.route";
@@ -23,6 +24,7 @@ const adminRouteV1 = (app: Express) => {
   app.use(`${path}/buses`, busRoutes);
   app.use(`${path}/directions`, directionRoutes);
   app.use(`${path}/busRoutes`, busRouteRoutes);
+  app.use(`${path}/busRouteDetails`, busRouteDetailRoutes);
   app.use(`${path}/oneWayTicketPrices`, oneWayTicketPriceRoutes);
   app.use(`${path}/monthTicketPrices`, monthTicketPriceRoutes);
   app.use(`${path}/schedules`, scheduleRoutes);

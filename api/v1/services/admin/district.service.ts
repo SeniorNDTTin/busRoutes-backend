@@ -1,7 +1,7 @@
 import { Request } from "express";
 
-import IDistrict from "../../interfaces/district.interface"
-import DistrictModel from "../../models/district.model"
+import IDistrict from "../../../../interfaces/district.interface"
+import DistrictModel from "../../../../models/district.model"
 
 const find = async (req: Request) => {
   const districts = await DistrictModel.find({});

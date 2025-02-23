@@ -1,6 +1,6 @@
 import { Request } from "express";
-import IBus from "../../interfaces/bus.interface";
-import BusModel from "../../models/bus.model";
+import IBus from "../../../../interfaces/bus.interface";
+import BusModel from "../../../../models/bus.model";
 
 // Lấy danh sách tất cả các bus
 const find = async (req: Request) => {

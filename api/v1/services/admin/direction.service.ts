@@ -1,7 +1,7 @@
 import { Request } from "express";
 
-import DirectionModel from "../../models/direction.model";
-import IDirection from "../../interfaces/direction.interface";
+import DirectionModel from "../../../../models/direction.model";
+import IDirection from "../../../../interfaces/direction.interface";
 
 const find = async (req: Request) => {
   const directions = await DirectionModel.find({});

@@ -1,7 +1,7 @@
 import { Request } from "express";
 
-import StreetModel from "../../models/street.model";
-import IStreet from "../../interfaces/street.interface";
+import StreetModel from "../../../../models/street.model";
+import IStreet from "../../../../interfaces/street.interface";
 
 const find = async (req: Request) => {
   const streets = await StreetModel.find({});

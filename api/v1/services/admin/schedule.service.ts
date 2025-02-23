@@ -1,7 +1,7 @@
 import { Request } from "express";
 
-import ScheduleModel from "../../models/schedule.model";
-import ISchedule from "../../interfaces/schedule.interface";
+import ScheduleModel from "../../../../models/schedule.model";
+import ISchedule from "../../../../interfaces/schedule.interface";
 
 const find = async (req: Request) => {
   const schedules = await ScheduleModel.find({});

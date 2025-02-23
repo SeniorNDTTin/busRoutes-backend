@@ -1,7 +1,7 @@
 import { Request } from "express";
 
-import MonthTicketPriceModel from "../../models/monthTicketPrice.model";
-import IMonthTicketPrice from "../../interfaces/monthTicketPrice.interface";
+import MonthTicketPriceModel from "../../../../models/monthTicketPrice.model";
+import IMonthTicketPrice from "../../../../interfaces/monthTicketPrice.interface";
 
 const find = async (req: Request) => {
   const monthTicketPrices = await MonthTicketPriceModel.find({});

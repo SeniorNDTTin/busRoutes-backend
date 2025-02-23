@@ -1,7 +1,7 @@
 import { Request } from "express";
 
-import IBusStop from "../../interfaces/busStop.interface"
-import BusStopModel from "../../models/busStop.model"
+import IBusStop from "../../../../interfaces/busStop.interface"
+import BusStopModel from "../../../../models/busStop.model"
 
 const find = async (req: Request) => {
   const busStops = await BusStopModel.find({});

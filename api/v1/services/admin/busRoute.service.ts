@@ -1,7 +1,7 @@
 import { Request } from "express";
 
-import busRouteModel from "../../models/busRoute.model";
-import IBusRoute from "../../interfaces/busRoute.interface";
+import busRouteModel from "../../../../models/busRoute.model";
+import IBusRoute from "../../../../interfaces/busRoute.interface";
 
 const find = async (req: Request) => {
   const busRoutes = await busRouteModel.find({});

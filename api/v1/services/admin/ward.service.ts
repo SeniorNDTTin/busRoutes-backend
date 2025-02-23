@@ -1,7 +1,7 @@
 import { Request } from "express";
 
-import WardModel from "../../models/ward.model";
-import IWard from "../../interfaces/ward.interface";
+import WardModel from "../../../../models/ward.model";
+import IWard from "../../../../interfaces/ward.interface";
 
 const find = async (req: Request) => {
   const wards = await WardModel.find({});

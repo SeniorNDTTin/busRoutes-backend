@@ -13,6 +13,7 @@ import busRouteDetailRoutes from "./busRouteDetail.route";
 import oneWayTicketPriceRoutes from "./oneWayTicketPrice.route";
 import monthTicketPriceRoutes from "./monthTicketPrice.route";
 import scheduleRoutes from "./schedule.route";
+import customerRoutes from "./customer.route";
 
 const adminRouteV1 = (app: Express) => {
   const path = "/api/v1" + configs.prefixAdmin;
@@ -28,6 +29,7 @@ const adminRouteV1 = (app: Express) => {
   app.use(`${path}/oneWayTicketPrices`, oneWayTicketPriceRoutes);
   app.use(`${path}/monthTicketPrices`, monthTicketPriceRoutes);
   app.use(`${path}/schedules`, scheduleRoutes);
+  app.use(`${path}/customers`, customerRoutes);
 }
 
 export default adminRouteV1;

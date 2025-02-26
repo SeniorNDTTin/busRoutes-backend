@@ -4,11 +4,13 @@ import { NextFunction, Request, Response } from "express";
 const create = (req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> => {
   try {
     const registerDate = req.body.registerDate;
+    const expiredDate = req.body.expiredDate;
     const expired = req.body.expired;
     const customerId = req.body.customerId;
 
     if (
       registerDate === undefined ||
+      expiredDate === undefined ||
       expired === undefined ||
       customerId === undefined
     ) {
@@ -20,6 +22,7 @@ const create = (req: Request, res: Response, next: NextFunction): void | Respons
 
     if (
       typeof registerDate !== "string" ||
+      typeof expiredDate !== "string" ||
       typeof expired !== "boolean" ||
       typeof customerId !== "string"
     ) {
@@ -42,11 +45,13 @@ const create = (req: Request, res: Response, next: NextFunction): void | Respons
 const update = (req: Request, res: Response, next: NextFunction): void | Response<any, Record<string, any>> => {
   try {
     const registerDate = req.body.registerDate;
+    const expiredDate = req.body.expiredDate;
     const expired = req.body.expired;
     const customerId = req.body.customerId;
 
     if (
       registerDate === undefined &&
+      expiredDate === undefined &&
       expired === undefined &&
       customerId === undefined
     ) {
@@ -58,6 +63,7 @@ const update = (req: Request, res: Response, next: NextFunction): void | Respons
 
     if (
       (registerDate && typeof registerDate !== "string") ||
+      (expiredDate && typeof expiredDate !== "string") ||
       (expired && typeof expired !== "boolean") ||
       (customerId && typeof customerId !== "string")
     ) {

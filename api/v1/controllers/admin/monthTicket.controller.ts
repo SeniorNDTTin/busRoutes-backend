@@ -50,6 +50,7 @@ const getById = async (req: Request, res: Response): Promise<Response<any, Recor
 const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
   try {
     const registerDate: string = req.body.registerDate;
+    const expiredDate: string = req.body.expiredDate;
     const expired: boolean = req.body.expired;
     const customerId: string = req.body.customerId;
 
@@ -63,6 +64,7 @@ const create = async (req: Request, res: Response): Promise<Response<any, Record
 
     const newMonthTicket = await monthTicketService.create({
       registerDate,
+      expiredDate,
       expired,
       customerId
     });
@@ -85,6 +87,7 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
     const id: string = req.params.id;
 
     const registerDate: string = req.body.registerDate;
+    const expiredDate: string = req.body.expiredDate;
     const expired: boolean = req.body.expired;
     const customerId: string = req.body.customerId;
 
@@ -110,6 +113,7 @@ const update = async (req: Request, res: Response): Promise<Response<any, Record
 
     const newMonthTicket = await monthTicketService.update(id, {
       registerDate,
+      expiredDate,
       expired,
       customerId
     });

@@ -5,6 +5,10 @@ const MonthTicketSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  expiredDate: {
+    type: String,
+    required: true
+  },
   expired: {
     type: Boolean,
     required: true

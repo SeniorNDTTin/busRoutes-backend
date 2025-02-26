@@ -13,6 +13,11 @@ const findById = async (id: string) => {
   return busRouteDetailExists;
 }
 
+const findByRouteId = async(id : string) => {
+  const busRouteDetails = await BusRouteDetailModel.find({ busRouteId : id})
+  return busRouteDetails;
+}
+
 const create = async (busRouteDetail: Partial<IBusRouteDetail>) => {
   const newBusRouteDetail = new BusRouteDetailModel(busRouteDetail);
   await newBusRouteDetail.save();
@@ -34,6 +39,7 @@ const del = async (id: string) => {
 const busRouteDetailService = {
   find,
   findById,
+  findByRouteId,
   create,
   update,
   del

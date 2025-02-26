@@ -13,7 +13,7 @@ const create = (req: Request, res: Response, next: NextFunction): void | Respons
 
 		if (
 			!name ||
-			!fullDistance ||
+			// !fullDistance ||
 			!fullPrice ||
 			!time ||
 			!firstFlightStartTime ||
@@ -63,7 +63,8 @@ const update = (req: Request, res: Response, next: NextFunction): void | Respons
 
 		if (
 			!name &&
-			!fullDistance &&
+			// !fullDistance &&
+			fullDistance === undefined &&
 			!fullPrice &&
 			!time &&
 			!firstFlightStartTime &&

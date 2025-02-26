@@ -1,11 +1,12 @@
 import express, { Router } from "express";
 const router: Router = express.Router();
 
-import validate from "../../validates/admin/busRouteDetail.model";
+import validate from "../../validates/admin/busRouteDetail.validate";
 import controller from "../../controllers/admin/busRouteDetail.controller"; 
 
 router.get("/get", controller.get);
 router.get("/get/:id", controller.getById);
+router.get("/getRoute/:id", controller.getByRouteId);
 
 router.post(
   "/create",

@@ -11,7 +11,7 @@ const create = (req: Request, res: Response, next: NextFunction): void | Respons
 
     if (
       !orderNumber ||
-      !distancePre ||
+      // !distancePre ||
       !busRouteId ||
       !busStopId ||
       !directionId

@@ -21,6 +21,24 @@ const get = async (req: Request, res: Response): Promise<Response<any, Record<st
     });
   }
 }
+//[GET]  /api/v1/admin/busRouteDetails/getRoute/67bd84115a02988ad22f5692
+const getByRouteId = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
+  try {
+    const id : string = req.params.id;
+
+    const busRouteDetails = await busRouteDetailService.findByRouteId(id);
+    return res.json({
+      code: 200,
+      message: "Bus route details found.",
+      data: busRouteDetails
+    });
+  } catch {
+    return res.json({
+      code: 500,
+      message: "Something went wrong."
+    });
+  }
+}
 
 // [GET] /api/v1/admin/busRouteDetails/get/:id
 const getById = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
@@ -201,6 +219,7 @@ const del = async (req: Request, res: Response): Promise<Response<any, Record<st
 const busRouteDetailController = {
   get,
   getById,
+  getByRouteId,
   create,
   update,
   del

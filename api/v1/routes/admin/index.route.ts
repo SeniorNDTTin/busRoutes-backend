@@ -16,6 +16,7 @@ import scheduleRoutes from "./schedule.route";
 import customerRoutes from "./customer.route";
 import monthTicketRoutes from "./monthTicket.route";
 import oneWayTicketRoutes from "./oneWayTicket.route";
+import ticketDetailRoutes from "./ticketDetail.route";
 
 const adminRouteV1 = (app: Express) => {
   const path = "/api/v1" + configs.prefixAdmin;
@@ -34,6 +35,7 @@ const adminRouteV1 = (app: Express) => {
   app.use(`${path}/customers`, customerRoutes);
   app.use(`${path}/monthTickets`, monthTicketRoutes);
   app.use(`${path}/oneWayTickets`, oneWayTicketRoutes);
+  app.use(`${path}/ticketDetails`, ticketDetailRoutes);
 }
 
 export default adminRouteV1;

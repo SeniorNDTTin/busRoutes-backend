@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import oneWayTicketService from "../../services/admin/oneWayTicket.service";
+import oneWayTicketService from "../../services/client/oneWayTicket.service";
 
 // [POST] /api/v1/oneWayTickets/create
 const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {

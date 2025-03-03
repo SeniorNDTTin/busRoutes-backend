@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import monthTicketService from "../../services/admin/monthTicket.service";
-import customerService from "../../services/admin/customer.service";
+import monthTicketService from "../../services/client/monthTicket.service";
+import customerService from "../../services/client/customer.service";
 
 // [POST] /api/v1/admin/monthTickets/create
 const create = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {

@@ -280,11 +280,29 @@ const del = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
+// [GET] /api/v1/admin/ticketDetails/oneWayTicket/:oneWayTicketId
+const getDetailByOneWayTicket = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { oneWayTicketId } = req.params;
+    const ticketDetails = await ticketDetailService.findByOneWayTicketId(oneWayTicketId); 
+    return res.json({ 
+      code: 200, 
+      message: "Ticket details found.", data: ticketDetails 
+    });
+  } catch {
+    return res.json({ 
+      code: 500, 
+      message: "Something went wrong." 
+    });
+  }
+};
+
 const ticketDetailController = {
   get,
   getById,
   create,
   update,
-  del
+  del,
+  getDetailByOneWayTicket
 };
 export default ticketDetailController;

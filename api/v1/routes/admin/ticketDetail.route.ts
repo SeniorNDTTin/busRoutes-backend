@@ -21,4 +21,6 @@ router.patch(
 
 router.delete("/delete/:id", controller.del);
 
+router.get("/oneWayTicket/:oneWayTicketId", controller.getDetailByOneWayTicket);
+
 export default router;

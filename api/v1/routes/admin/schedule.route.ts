@@ -21,4 +21,6 @@ router.patch(
 
 router.delete("/delete/:id", controller.del);
 
+router.get("/busRoute/:busRouteId", controller.getSchedulesByBusRoute);
+
 export default router;

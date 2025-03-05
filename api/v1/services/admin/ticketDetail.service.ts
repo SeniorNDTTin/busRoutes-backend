@@ -32,11 +32,16 @@ const del = async (id: string) => {
   await TicketDetailModel.deleteOne({ _id: id });
 }
 
+const findByOneWayTicketId = async (oneWayTicketId: string) => {
+  return await TicketDetailModel.findOne({ ticketId: oneWayTicketId });
+}
+
 const ticketDetailService = {
   find,
   findById,
   create,
   update,
-  del
+  del,
+  findByOneWayTicketId
 };
 export default ticketDetailService;

@@ -168,11 +168,29 @@ const del = async (req: Request, res: Response): Promise<Response<any, Record<st
   }
 }
 
+// [GET] /api/v1/admin/schedules/busRoute/:busRouteId
+const getSchedulesByBusRoute = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { busRouteId } = req.params;
+    const schedules = await scheduleService.findByBusRoute(busRouteId); 
+    return res.json({ 
+      code: 200, 
+      message: "Schedules found.", data: schedules 
+    });
+  } catch {
+    return res.json({ 
+      code: 500, 
+      message: "Something went wrong." 
+    });
+  }
+};
+
 const scheduleController = {
   get,
   getById,
   create,
   update,
-  del
+  del,
+  getSchedulesByBusRoute
 };
 export default scheduleController;

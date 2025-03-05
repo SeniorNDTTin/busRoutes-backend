@@ -31,11 +31,16 @@ const del = async (id: string) => {
   await ScheduleModel.deleteOne({ _id: id });
 }
 
+const findByBusRoute = async (busRouteId: string) => {
+  return await ScheduleModel.find({busRouteId});
+}
+
 const scheduleService = {
   find,
   findById,
   create,
   update,
-  del
+  del,
+  findByBusRoute
 };
 export default scheduleService;
